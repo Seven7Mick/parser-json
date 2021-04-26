@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   // vars
   const innerFile = document.querySelector('#input-file');
+  const btnClear = document.querySelector('.parse-form__button_clear');
+
   const parseInner = document.querySelector('.parse-inner');
 
   innerFile.addEventListener('change', changeValueProduct);
-
+  // Чтение файла
   function changeValueProduct() {
     const file = this.files[0];
     const reader = new FileReader();
@@ -15,10 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const jsonData = JSON.parse(reader.result);
 
       parseJson(jsonData);
+      checkedLengthForm();
       setMaskToInput();
     }
   }
-
+  // functions
   function parseJson(json) {
     const { name, fields, references, buttons } = json;
 
@@ -199,12 +202,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Button Clear
-  const btnClear = document.querySelector('.parse-form__button_clear');
-
+  
   btnClear.addEventListener('click', () => {
     while (parseInner.firstChild) {
       parseInner.removeChild(parseInner.firstChild)
     }
+    checkedLengthForm();
   })
 
+  // Checked length form
+  const checkedLengthForm = () => {
+    parseInner.children.length !== 0 
+    ? btnClear.style.display = 'block' 
+    : btnClear.style.display = 'none'
+  }
+  
 })
