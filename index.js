@@ -110,6 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
         inputField.classList.add('form__fieldset-input_color');
         inputField.value = input.colors[Math.floor(Math.random() * input.colors.length)];
       }
+      if (input.type == "file") {
+        inputField.accept = 'image/*';
+      }
 
       if (input.filetype) {
         const acceptFormat = "." + input.filetype.join(',.');
@@ -181,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return refWrapper
   }
 
-  // Create Button
+  // Create Button in Form
   function createButton(buttons) {
     const createBtn = document.createElement('button');
 
@@ -202,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Button Clear
-  
+
   btnClear.addEventListener('click', () => {
     while (parseInner.firstChild) {
       parseInner.removeChild(parseInner.firstChild)
@@ -212,9 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Checked length form
   const checkedLengthForm = () => {
-    parseInner.children.length !== 0 
-    ? btnClear.style.display = 'block' 
-    : btnClear.style.display = 'none'
+    parseInner.children.length !== 0
+      ? btnClear.style.display = 'block'
+      : btnClear.style.display = 'none'
   }
-  
+
 })
